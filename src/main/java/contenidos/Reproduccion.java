@@ -19,4 +19,8 @@ public class Reproduccion {
   public Integer getMinuto() {
     return minuto;
   }
+
+  public void setMinuto(Integer minuto) {
+    this.minuto = minuto;
+  }
 }

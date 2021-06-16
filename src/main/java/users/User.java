@@ -4,31 +4,54 @@ import Reproduccion.Reproductor;
 import contenidos.Contenido;
 import contenidos.Reproduccion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class User {
-  private List<Reproduccion> reproduccionesEnCurso;
+  private List<Reproduccion> reproduccionesParaContinuarViendo = new ArrayList<Reproduccion>();
   private Integer idUsuario;
   private Reproductor reproductor;
+  private Reproduccion reproduccionEnCurso;
 
   public User(Integer idUsuario, Reproductor reproductor) {
     this.idUsuario = idUsuario;
     this.reproductor = reproductor;
   }
 
+  public List<Reproduccion> getReproduccionesParaContinuarViendo() {
+    return reproduccionesParaContinuarViendo;
+  }
+
+  public Integer getIdUsuario() {
+    return idUsuario;
+  }
+
+  public Reproduccion getReproduccionEnCurso() {
+    return reproduccionEnCurso;
+  }
+
+  public void setReproduccionEnCurso(Reproduccion reproduccionEnCurso) {
+    this.reproduccionEnCurso = reproduccionEnCurso;
+  }
+
+  public void addReproduccionesParaContinuarViendo(Reproduccion reproduccion){
+    reproduccionesParaContinuarViendo.add(reproduccion);
+  }
+
   public void obtenerContenidosEnCurso(){
-    reproduccionesEnCurso.forEach(reproduccion -> reproduccion.getContenidoAsociado().print());
+    reproduccionesParaContinuarViendo.forEach(reproduccion -> reproduccion.getContenidoAsociado().print());
   }
 
   public void continuarViendo(Contenido contenido){
-    Reproduccion reproduccion = reproduccionesEnCurso
+    Reproduccion reproduccion = reproduccionesParaContinuarViendo
         .stream()
         .filter(r -> r.getContenidoAsociado() == contenido)
         .collect(Collectors.toList())
         .get(0);
-    reproduccionesEnCurso.remove(reproduccion);
+    reproduccionesParaContinuarViendo.remove(reproduccion);
     reproductor.play(contenido.getIdContenido(), reproduccion.getMinuto());
+    setReproduccionEnCurso(reproduccion);
   }
 
 }
