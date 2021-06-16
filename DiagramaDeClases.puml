@@ -1,0 +1,48 @@
+@startuml
+
+class User{
+      List<Reproduccion> reproduccionesParaContinuarViendo;
+      Integer idUsuario;
+      Reproductor reproductor;
+      Reproduccion reproduccionEnCurso;
+      obtenerContenidosEnCurso()
+      continuarViendo(Contenido contenido)
+}
+
+class Contenido{
+      private String titulo;
+      private Integer idContenido;
+      private Genero genero;
+      print();
+}
+
+class Reproduccion{
+      Contenido contenidoAsociado;
+      Integer minuto;
+}
+
+enum Genero{
+      DOCUMENTAL,
+      TERROR,
+      SUSPENSO,
+      COMEDIA,
+      SUPERHEROES,
+      CIENCIA_FICCION,
+      POLICIAL,
+      ...
+}
+
+interface Reproductor{
+      Boolean play(int idVideo, int minutoInicio);
+      void stop();
+      void registerOnPlay(PlayListener playListener);
+      void registerOnStop(StopListener stopListener);
+      void registerOnFinish(FinishListener listener);
+}
+
+User -d->"*" Reproduccion
+Reproduccion -> Contenido
+Contenido -> Genero
+User -> Reproductor
+
+@enduml

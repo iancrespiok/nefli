@@ -50,7 +50,7 @@ public class User {
         .collect(Collectors.toList())
         .get(0);
     reproduccionesParaContinuarViendo.remove(reproduccion);
-    reproductor.play(contenido.getIdContenido(), reproduccion.getMinuto());
+    //reproductor.play(contenido.getIdContenido(), reproduccion.getMinuto());
     setReproduccionEnCurso(reproduccion);
   }
 

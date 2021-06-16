@@ -40,7 +40,7 @@ public class UsuarioTest {
 
   @Test
   void listarYElegir(){
-   // iancrespiok.obtenerContenidosEnCurso();
+    iancrespiok.obtenerContenidosEnCurso();
     iancrespiok.continuarViendo(ironman1);
     Assertions.assertEquals(reproduccionIronMan1, iancrespiok.getReproduccionEnCurso());
   }
